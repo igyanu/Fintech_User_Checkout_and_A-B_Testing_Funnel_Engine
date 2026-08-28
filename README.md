@@ -113,40 +113,13 @@ The **E-Commerce Conversion Dashboard** aggregates the performance of Variant 1 
 ```
 ├── data/
 │   └── synthetic_ecommerce_user_data.csv    # Raw user funnel & checkout logs
-├── notebooks/
-│   ├── funnel_analysis.ipynb                # Funnel drop-off logic
-│   └── ab_testing_ztest.ipynb               # Statistical testing & Power analysis
+│── funnel_analysis.sql                      # Funnel drop-off logic
+│   ab_testing_ztest.ipynb                   # Statistical testing & Power analysis
 ├── dashboard/
 │   ├── ecommerce_conversion_dashboard.pbix  # Power BI report file
-│   └── dashboard_screenshot.png             # Visual dashboard view
+│   └── conversion_dashboard.png             # Visual dashboard view
 └── README.md                                # Project Documentation
 ```
-
----
-
-## 🚀 How to Run the Analysis
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/fintech-ecommerce-funnel-analysis.git
-   cd fintech-ecommerce-funnel-analysis
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pip install pandas numpy scipy statsmodels matplotlib
-   ```
-
-3. **Run Statistical Analysis:**
-   ```bash
-   python notebooks/ab_testing_ztest.py
-   ```
-
-4. **Explore Power BI Dashboard:**
-   * Open `dashboard/ecommerce_conversion_dashboard.pbix` in **Power BI Desktop**.
-   * Use the **Select Variant** slicer to filter metrics interactively.
-
----
 
 ## 🎯 Conclusion & Business Recommendations
 
