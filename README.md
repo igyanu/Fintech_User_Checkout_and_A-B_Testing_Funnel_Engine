@@ -95,7 +95,7 @@ The **E-Commerce Conversion Dashboard** aggregates the performance of Variant 1 
    * **Credit/Debit Card:** Strong performance in Variant 2 (382 conversions).
 
 3. **Financial Impact & Annual Uplift:**
-   * Implementing Variant 2 across the entire user base yields a projected **+₹122.50K Annual Revenue Impact** ($	ext{Variant 2 Revenue } 533.76	ext{K} - 	ext{Variant 1 Revenue } 411.26	ext{K}$).
+   * Implementing Variant 2 across the entire user base yields a projected **+₹122.50K Annual Revenue Impact** ($	Variant 2 Revenue 533.76 K - 	Variant 1 Revenue  411.26 K $).
 
 ---
 
