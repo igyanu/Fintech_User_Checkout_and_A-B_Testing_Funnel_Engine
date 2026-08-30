@@ -1,128 +1,87 @@
 # Fintech E-Commerce Funnel & Payment Method Conversion Analysis (A/B Testing)
 
-An end-to-end fintech data analytics project analyzing e-commerce user conversion funnels, evaluating payment gateway modifications via A/B testing (statistical hypothesis testing), and visualizing business impact through an interactive Power BI dashboard.
+End-to-end analysis of an e-commerce checkout funnel and a payment-flow A/B test,
+using statistical hypothesis testing to validate whether a UI/payment change
+(Variant 2) drives a real, non-random improvement in conversion over the
+existing flow (Variant 1).
 
----
+> **Note:** All data used in this project is synthetically generated to simulate
+> realistic e-commerce user behavior, since no real production dataset was
+> available. As synthetic data, no missing-value or duplicate-record cleaning
+> was required.
 
-## 📌 Project Overview
+## 📌 Key Results
 
-This project simulates a real-world e-commerce fintech scenario. The objective was to evaluate whether optimizing payment method offerings and checkout flows (Variant 2 vs. Variant 1/Control) leads to statistically significant improvements in user conversion rates and revenue growth.
+- **Funnel analyzed:** 100K+ user interaction events (page views, cart adds,
+  checkout starts, payments) across 2,500 unique user sessions.
+- **Checkout funnel drop-off:** 22.8% of users who reach checkout do not
+  complete payment — the single largest leak in the funnel.
+- **A/B test result:** Variant 2 improved conversion from 11.78% → 13.68%
+  (+1.9 percentage points, a 16.1% relative lift), statistically significant
+  at p < 0.001.
+- **Statistical power:** 98.1% — well above the 80% minimum threshold, meaning
+  the test had more than sufficient sample size to reliably detect a true effect.
+- **Projected impact:** +₹122.5K annual revenue uplift if Variant 2 is rolled out.
 
-### **Key Metrics Highlighted in Dashboard:**
-* **Total Users Evaluated:** 20.00K
-* **Total Conversions:** 3.00K (Overall Conversion Rate: **12.73%**)
-* **Total Baseline Revenue:** ₹157.94K
-* **Estimated Revenue (Variant 1):** ₹411.26K
-* **Estimated Revenue (Variant 2):** ₹533.76K
-* **Projected Annual Revenue Impact:** **+₹122.50K Uplift**
+## 🧭 1. Funnel Analysis
 
----
+Tracked user progression through: Visit → Product View → Add to Cart → Checkout → Payment,
+across 2,500 unique users and 100K+ logged events.
 
-## 🏗 Project Workflow & Architecture
+| Stage                  | Conversion % | Drop-off   |
+|--------------------------|-------------|------------|
+| Visit → Product View     | 100.00%     | —          |
+| Product View → Cart      | 99.36%      | 0.64%      |
+| Cart → Checkout          | 95.89%      | 4.11%      |
+| Checkout → Payment       | 77.20%      | **22.80%** |
 
-```
-┌─────────────────────────────────┐
-│  Synthetic User Activity Data   │
-│ (20K E-commerce Checkout Logs)  │
-└────────────────┘────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────┐
-│     Funnel Analysis & Drop   │
-│  - Landing -> Cart -> Checkout  │
-└────────────────┘────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────┐
-│    Statistical Hypothesis Test  │
-│  - Two-Proportion Z-Test        │
-│  - Statistical Power Analysis   │
-└────────────────┘────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────┐
-│   Power BI Dashboard & Impact   │
-│  - Device & Payment Splits      │
-│  - Revenue Impact Forecasting   │
-└─────────────────────────────────┘
-```
+**Finding:** checkout-to-payment is the primary friction point in the funnel,
+motivating the payment-flow A/B test below.
 
----
+## 🧪 2. A/B Test: Statistical Hypothesis Testing
 
-## 📊 1. Funnel Analysis
+**Hypotheses**
+- H₀ (Null): Conversion rate does not differ significantly between Variant 1 and Variant 2
+- H₁ (Alternative): Variant 2 has a significantly higher conversion rate than Variant 1
 
-We tracked synthetic user journeys through the primary e-commerce conversion funnel:
-1. **Homepage / Landing Page Visit**
-2. **Product View & Add to Cart**
-3. **Initiate Checkout**
-4. **Payment Processing & Order Completion**
+**Method:** Two-proportion Z-test, α = 0.05
 
-### Key Findings:
-* Significant drop-offs occurred between **Initiate Checkout** and **Payment Completion**, prompting an investigation into checkout experience and payment options.
-* Introducing modernized payment flows (Variant 2 featuring UPI and Card optimization) successfully reduced checkout friction.
+| Metric             | Variant 1 | Variant 2 |
+|----------------------|-----------|-----------|
+| Conversion Rate       | 11.78%    | 13.68%    |
 
----
+- **Result:** p < 0.001 → Reject H₀. The uplift in Variant 2 is statistically
+  significant and not attributable to random chance.
+- **Absolute lift:** +1.9 percentage points
+- **Relative lift:** +16.1%
+- **Statistical power:** 98.12% — the test design had a 98.12% probability of
+  detecting the true effect if one exists, confirming the result is not a false
+  positive from an underpowered sample.
 
-## 🧪 2. Statistical Significance & Hypothesis Testing
+## 📊 3. Power BI Dashboard
 
-To prove that observed conversion uplifts in **Variant 2** were statistically meaningful and not due to random chance, rigorous hypothesis testing was performed.
+Aggregates funnel and A/B test performance across device type and payment method,
+with projected revenue impact.
 
-### **Hypothesis Formulation:**
-* **Null Hypothesis ($H_0$):** $p_{variant1} = p_{variant2}$ (Payment method changes have no effect on conversion rate).
-* **Alternative Hypothesis ($H_1$):** $p_{variant2} > p_{variant1}$ (Variant 2 significantly increases conversion rate).
+<img width="788" height="447" alt="conversion_dashboard" src="https://github.com/user-attachments/assets/b76ac438-779e-43a7-bf4f-8a5e6145952b" />
 
-### **Statistical Tests Conducted:**
-1. **Two-Proportion Z-Test:** Calculated $p$-value ($p < 0.05$) to confirm statistical significance at a 95% confidence level.
-2. **Statistical Power Analysis:** Verified test power ($1 - \beta > 0.80$) to guarantee sufficient sample size ($N = 20,000$) and minimize Type II errors.
-3. **Lift Calculation:** Measured the relative conversion rate lift between Variant 1 and Variant 2 across key dimensions.
 
----
+## 🎯 Conclusion & Recommendation
 
-## 💻 3. Power BI Dashboard Insights
+- **Deploy Variant 2** — the Z-test confirms a statistically significant,
+  non-random improvement in checkout-to-payment conversion.
+- **Prioritize mobile + UPI optimization** — highest-converting segment under
+  Variant 2.
+- **Projected annual revenue impact:** +₹122.5K if rolled out.
 
-The **E-Commerce Conversion Dashboard** aggregates the performance of Variant 1 and Variant 2 across device types and payment methods.
-
-### **Key Insights from Dashboard Visualization:**
-
-1. **Device Type Breakdown:**
-   * **Mobile:** High adoption for Variant 2 (794 conversions) vs Variant 1 (654 conversions).
-   * **Desktop:** Variant 1 (334 conversions) vs Variant 2 (374 conversions).
-   * **Tablet:** Stable across variants (Variant 1: 191, Variant 2: 198).
-
-2. **Payment Medium Distribution:**
-   * **NetBanking:** High volume in Variant 1 (1,179 conversions) but lower in Variant 2 (215 conversions), indicating shift towards seamless payment methods.
-   * **UPI:** Heavy driver in Variant 2 (769 conversions).
-   * **Credit/Debit Card:** Strong performance in Variant 2 (382 conversions).
-
-3. **Financial Impact & Annual Uplift:**
-   * Implementing Variant 2 across the entire user base yields a projected **+₹122.50K Annual Revenue Impact** ($	Variant 2 Revenue 533.76 K - 	Variant 1 Revenue  411.26 K $).
-
----
-
-## 🛠 Tech Stack & Tools Used
-
-* **Data Generation & Cleaning:** Python (`pandas`, `numpy`)
-* **Statistical Testing:** Python (`scipy.stats`, `statsmodels`)
-* **Data Visualization & Business Intelligence:** Power BI (DAX, Interactive Slicers, Custom Layouts)
-* **Documentation & Reporting:** Markdown
-
----
+## 🛠 Tech Stack
+Python (pandas, numpy, scipy.stats, statsmodels) · SQL · Power BI (DAX)
 
 ## 📂 Repository Structure
-
 ```
-├── data/
-│   └── synthetic_ecommerce_user_data.csv    # Raw user funnel & checkout logs
-│── funnel_analysis.sql                      # Funnel drop-off logic
-│   ab_testing_ztest.ipynb                   # Statistical testing & Power analysis
-├── dashboard/
-│   ├── ecommerce_conversion_dashboard.pbix  # Power BI report file
-│   └── conversion_dashboard.png             # Visual dashboard view
-└── README.md                                # Project Documentation
+├── data/                       # Synthetic funnel & A/B test event data
+├── funnel_analysis.sql         # Funnel drop-off logic
+├── ab_testing_ztest.ipynb      # Z-test, power analysis
+├── dashboard/                  # Power BI report + screenshot
+└── README.md
 ```
-
-## 🎯 Conclusion & Business Recommendations
-
-* **Deploy Variant 2:** The statistical z-test confirms that Variant 2 produces a non-random, statistically significant improvement in checkout conversion rates.
-* **Optimize for UPI & Mobile:** Mobile users using UPI/Cards account for the highest conversion volume in Variant 2. Prioritizing mobile checkout optimizations will yield the highest ROI.
-* **Revenue Growth:** Rollout of Variant 2 is projected to deliver an **annual revenue increase of ₹122.50K**.
