@@ -18,7 +18,7 @@ existing flow (Variant 1).
   complete payment — the single largest leak in the funnel.
 - **A/B test result:** Variant 2 improved conversion from 11.78% → 13.68%
   (+1.9 percentage points, a 16.1% relative lift), statistically significant
-  at p < 0.001.
+  at p < 0.005.
 - **Statistical power:** 98.1% — well above the 80% minimum threshold, meaning
   the test had more than sufficient sample size to reliably detect a true effect.
 - **Projected impact:** +₹122.5K annual revenue uplift if Variant 2 is rolled out.
